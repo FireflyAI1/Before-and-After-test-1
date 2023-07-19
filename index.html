@@ -25,14 +25,14 @@
 </head>
 <body>
     <div id="container">
-        <img src="image_folder/Left Houlton School before.jpg" id="image" alt="Interactive Image">
+        <img src="Left Houlton School before.jpg" id="image" alt="Interactive Image">
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/gyronorm/dist/gyronorm.complete.min.js"></script>
     <script>
         // Set the initial image source before the gyronorm library is initialized
         var image = document.getElementById("image");
-        image.src = "image_folder/Left Houlton School before.jpg"; // Replace with the path to your initial image
+        image.src = "Left Houlton School before.jpg"; // Replace with the path to your initial image
 
         window.addEventListener("DOMContentLoaded", function () {
             if (window.DeviceOrientationEvent) {
@@ -45,11 +45,11 @@
                         // Adjust the image source based on the tilt value
                         // Customize this part according to your image set
                         if (beta < -30) {
-                            image.src = "Right Houlton School after.jpg"; // Replace with the path to image1
+                            image.src = "Right Houlton School after.jpg.jpg"; // Replace with the path to image1
                         } else if (beta > 30) {
-                            image.src = "Right Houlton School after.jpg"; // Replace with the path to image2
+                            image.src = "Right Houlton School after.jpg.jpg"; // Replace with the path to image2
                         } else {
-                            image.src = "image_folder/Left Houlton School before.jpg"; // Replace with the path to your initial image
+                            image.src = "Left Houlton School before.jpg"; // Replace with the path to your initial image
                         }
                     });
                 }).catch(function (e) {
