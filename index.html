@@ -63,29 +63,35 @@
         // Initialize the image based on the default slider value
         updateImage();
 
-        window.addEventListener("DOMContentLoaded", function () {
-            if (window.DeviceOrientationEvent) {
-                var gn = new GyroNorm();
+        // Check if the device is a mobile or desktop device
+        var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-                gn.init().then(function () {
-                    gn.start(function (data) {
-                        var gamma = data.do.gamma; // Tilt value around the Y-axis in degrees
+        // Enable gyronorm.js functionality for mobile devices only
+        if (isMobile) {
+            window.addEventListener("DOMContentLoaded", function () {
+                if (window.DeviceOrientationEvent) {
+                    var gn = new GyroNorm();
 
-                        // Adjust the image source based on the tilt value
-                        // Customize this part according to your image set
-                        if (Math.abs(gamma) > 30) {
-                            image.src = "Right Houlton School after.jpg"; // Replace with the path to image1
-                        } else {
-                            image.src = "Left Houlton School before.jpg"; // Replace with the path to your initial image
-                        }
+                    gn.init().then(function () {
+                        gn.start(function (data) {
+                            var gamma = data.do.gamma; // Tilt value around the Y-axis in degrees
+
+                            // Adjust the image source based on the tilt value
+                            // Customize this part according to your image set
+                            if (Math.abs(gamma) > 30) {
+                                image.src = "Right Houlton School after.jpg"; // Replace with the path to image1
+                            } else {
+                                image.src = "Left Houlton School before.jpg"; // Replace with the path to your initial image
+                            }
+                        });
+                    }).catch(function (e) {
+                        console.log("GyroNorm not supported or not enabled.", e);
                     });
-                }).catch(function (e) {
-                    console.log("GyroNorm not supported or not enabled.", e);
-                });
-            } else {
-                console.log("DeviceOrientationEvent not supported.");
-            }
-        });
+                } else {
+                    console.log("DeviceOrientationEvent not supported.");
+                }
+            });
+        }
     </script>
 </body>
 </html>
