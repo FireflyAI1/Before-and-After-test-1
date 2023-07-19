@@ -33,8 +33,37 @@
 
     <script src="https://cdn.jsdelivr.net/npm/gyronorm/dist/gyronorm.complete.min.js"></script>
     <script>
-        // Rest of your JavaScript code remains unchanged
-        // ...
+        // Set the initial image source before the gyronorm library is initialized
+        var image = document.getElementById("image");
+        image.src = "Left Houlton School before.jpg"; // Replace with the path to your initial image
+
+        window.addEventListener("DOMContentLoaded", function () {
+            if (window.DeviceOrientationEvent) {
+                var gn = new GyroNorm();
+
+                gn.init().then(function () {
+                    gn.start(function (data) {
+                        var beta = data.do.beta; // Tilt value in degrees
+
+                        // Adjust the image source based on the tilt value
+                        // Customize this part according to your image set
+                        if (beta < -30) {
+                            image.src = "Right Houlton School after.jpg.jpg"; // Replace with the path to image1
+                        } else if (beta > 30) {
+                            image.src = "Right Houlton School after.jpg.jpg"; // Replace with the path to image2
+                        } else {
+                            image.src = "Left Houlton School before.jpg"; // Replace with the path to your initial image
+                        }
+                    });
+                }).catch(function (e) {
+                    console.log("GyroNorm not supported or not enabled.", e);
+                });
+            } else {
+                console.log("DeviceOrientationEvent not supported.");
+            }
+        });
     </script>
 </body>
-</html>
+</html> 
+
+ChatGPT
