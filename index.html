@@ -108,6 +108,15 @@
             isLeftImage = !isLeftImage; // Toggle the image state
         }
 
+        // Debounce function to limit the number of image updates triggered by gyronorm.js
+        function debounce(func, delay) {
+            let timer;
+            return function () {
+                clearTimeout(timer);
+                timer = setTimeout(func, delay);
+            };
+        }
+
         // Check if the device is a mobile or desktop device
         var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
@@ -116,6 +125,7 @@
             window.addEventListener("DOMContentLoaded", function () {
                 if (window.DeviceOrientationEvent) {
                     var gn = new GyroNorm();
+                    var debouncedUpdate = debounce(updateImage, 200); // Adjust the delay as needed
 
                     gn.init().then(function () {
                         gn.start(function (data) {
