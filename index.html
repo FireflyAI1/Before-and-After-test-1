@@ -25,7 +25,7 @@
 </head>
 <body>
     <div id="container">
-        <img src="Left Houlton School after.jpg" id="image" alt="Interactive Image">
+        <img src="Right Houlton School after.jpg" id="image" alt="Interactive Image">
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/gyronorm/dist/gyronorm.complete.min.js"></script>
@@ -40,14 +40,14 @@
 
                 gn.init().then(function () {
                     gn.start(function (data) {
-                        var beta = data.do.beta; // Tilt value in degrees
+                        var gamma = data.do.gamma; // Tilt value around the Y-axis in degrees
 
                         // Adjust the image source based on the tilt value
                         // Customize this part according to your image set
-                        if (beta < -30) {
+                        if (gamma < -30) {
                             image.src = "Right Houlton School after.jpg"; // Replace with the path to image1
-                        } else if (beta > 30) {
-                            image.src = "Right Houlton School before.jpg"; // Replace with the path to image2
+                        } else if (gamma > 30) {
+                            image.src = "Left Houlton School before.jpg"; // Replace with the path to image2
                         } else {
                             image.src = "Left Houlton School before.jpg"; // Replace with the path to your initial image
                         }
