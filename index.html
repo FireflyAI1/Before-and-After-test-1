@@ -48,9 +48,11 @@
         </div>
     </div>
 
+    <input type="range" id="slider" min="1" max="2" step="1" value="1">
+
     <script src="https://cdn.jsdelivr.net/npm/gyronorm/dist/gyronorm.complete.min.js"></script>
     <script>
-        // Set the initial image source before the gyronorm library is initialized
+        // Set the initial image source before the slider functionality is added
         var images = document.querySelectorAll(".image");
         var slider = document.getElementById("slider");
 
@@ -75,29 +77,23 @@
 
         // Enable gyronorm.js functionality for mobile devices only
         if (isMobile) {
-            window.addEventListener("DOMContentLoaded", function () {
-                if (window.DeviceOrientationEvent) {
-                    var gn = new GyroNorm();
+            var gn = new GyroNorm();
 
-                    gn.init().then(function () {
-                        gn.start(function (data) {
-                            var gamma = data.do.gamma; // Tilt value around the Y-axis in degrees
+            gn.init().then(function () {
+                gn.start(function (data) {
+                    var gamma = data.do.gamma; // Tilt value around the Y-axis in degrees
 
-                            // Adjust the image source based on the tilt value
-                            // Customize this part according to your image set
-                            if (Math.abs(gamma) > 30) {
-                                slider.value = 2;
-                            } else {
-                                slider.value = 1;
-                            }
-                            updateImage();
-                        });
-                    }).catch(function (e) {
-                        console.log("GyroNorm not supported or not enabled.", e);
-                    });
-                } else {
-                    console.log("DeviceOrientationEvent not supported.");
-                }
+                    // Adjust the image source based on the tilt value
+                    // Customize this part according to your image set
+                    if (Math.abs(gamma) > 30) {
+                        slider.value = 2;
+                    } else {
+                        slider.value = 1;
+                    }
+                    updateImage();
+                });
+            }).catch(function (e) {
+                console.log("GyroNorm not supported or not enabled.", e);
             });
         }
     </script>
